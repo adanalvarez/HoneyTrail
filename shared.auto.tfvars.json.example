@@ -1,0 +1,10 @@
+{
+    "enable_s3_event_selector": true,
+    "enable_dynamodb_event_selector": false,
+    "enable_lambda_event_selector": false,
+    "enable_sns": true,
+    "destination_email": "example@example.com",
+    "source_email": "",
+    "vpnapi_key": "",
+    "ses_identity": ""
+}
