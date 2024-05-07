@@ -6,5 +6,5 @@
     "destination_email": "example@example.com",
     "source_email": "",
     "vpnapi_key": "",
-    "ses_identity": ""
+    "ses_identities": [""]
 }

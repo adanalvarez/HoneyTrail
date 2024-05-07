@@ -78,7 +78,7 @@ resource "aws_iam_role_policy" "ses_lambda_policy" {
       Action = [
         "ses:SendEmail"
       ],
-      Resource = var.ses_identity,
+      Resource = var.ses_identities,
       Effect   = "Allow"
     }]
   })
