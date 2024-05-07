@@ -1,4 +1,7 @@
 # HoneyTrail
+<p align="center">
+  <img src="HoneyTrail.png" alt="HoneyTrail" width="300" />
+</p>
 Independently deploy customized honeytokens in AWS to trigger alerts on unauthorized access. It utilizes a dedicated CloudTrail for precise detection and notification specifically for honeytoken activity. 
 
 ## Configuration Details
