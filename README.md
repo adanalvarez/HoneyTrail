@@ -29,7 +29,7 @@ Before deploying HoneyTrail, you must configure the tool according to your speci
 **destination_email:** Mandatory. The email address where alerts will be sent.
 **source_email:** Required if using SES (SNS disabled) for notifications.
 **vpnapi_key:** Optional. If using SES (SNS disabled), you can specify a vpnapi.io key to include IP address information in the notifications.
-**ses_identity:** Required if using SES (SNS disabled) to verify the email identity.
+**ses_identities:** Required if using SES (SNS disabled), these are the identities the lambda will use to send the email. 
 
 ## Deployment Instructions
 
