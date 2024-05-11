@@ -8,7 +8,7 @@ Independently deploy customized honeyservices in AWS to trigger alerts on unauth
 
 Before deploying HoneyTrail, you must configure the tool according to your specific needs. Below is an example of the shared.auto.tfvars.json.example file included in this repository:
 
-`` 
+``` 
 {
     "enable_s3_event_selector": true,
     "enable_dynamodb_event_selector": false,
@@ -19,7 +19,7 @@ Before deploying HoneyTrail, you must configure the tool according to your speci
     "vpnapi_key": "",
     "ses_identity": [""]
 }
-``
+```
 ### Configuration Options
 
 **enable_s3_event_selector:** Set to true to deploy an S3 bucket as a deception service.
@@ -38,9 +38,25 @@ Before deploying HoneyTrail, you must configure the tool according to your speci
 - **Customize Deception Services:** To increase the effectiveness of the deception, you are encouraged to modify the names and data of the services in the honeytoken-dynamodb.tf, honeytoken-lambda.tf, and honeytoken-s3.tf files. Personalizing these details makes the deception more convincing.
 - **Initialize Terraform:** Run ``terraform init`` to initialize the Terraform configuration.
 - **Apply Terraform Configuration:** Execute ``terraform apply`` to deploy the HoneyTrail services to your AWS environment.
-- (Only for SNS) After the terraform apply, the destination_email will receive an email to subscribe to the SNS topic. Confirm the subscription to start receiving alerts. 
+- (Only for SNS) After the terraform apply, the destination_email will receive an email to subscribe to the SNS topic. Confirm the subscription to start receiving alerts.
+
+## How HoneyTrail Works
+HoneyTrail includes a few components designed to detect attackers:
+
+- **S3 Bucket:** It is an S3 bucket that contains an object called 'users_data.csv' full of fake data.
+- **Lambda:** A Go Lambda function named "GetAccessKeyForBackups", that doesn't show its code in the AWS console (because it is in Go), tempting attackers trying to find a backdoor access to invoke it.
+- **DynamoDB:** A DynamoDB table called 'CreditCardData'.
+
+A CloudTrail monitors these services using an advanced event selector that focuses exclusively on specific activities such as accessing the S3 file, invoking the Lambda function, or querying the DynamoDB table. When an attacker interacts with any of these services, a CloudTrail log is generated and stored in an S3 bucket configured with Event Notifications. This feature triggers a Lambda function that is set up to alert you via Simple Notification Service (SNS) or Simple Email Service (SES), depending on the chosen configuration.
+
+<p align="center">
+  <img src="HoneyTrail-Diagram.png" alt="HoneyTrail-Diagram." width="800" />
+</p>
 
 ## Usage and Alerts
 
 When an attacker interacts with any of the deployed services, a CloudTrail log is created and an alert is triggered.
 Alerts will be sent to the destination_email via SNS or SES, depending on your configuration.
+
+**Using SNS:** This method sends alerts directly to an email without needing any extra setup.
+**Using SES:** If you choose SES, you can get more detailed notifications. Plus, if you use a free API key from vpnapi.io, the notifications will also include additional information about the IP address of the requester. However, this setup requires a previously configured SES identity.
