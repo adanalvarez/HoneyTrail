@@ -2,7 +2,7 @@
 <p align="center">
   <img src="HoneyTrail.png" alt="HoneyTrail" width="300" />
 </p>
-Independently deploy customized honeytokens in AWS to trigger alerts on unauthorized access. It utilizes a dedicated CloudTrail for precise detection and notification specifically for honeytoken activity. 
+Independently deploy customized honeyservices in AWS to trigger alerts on unauthorized access. It utilizes a dedicated CloudTrail for precise detection and notification specifically for honeyservices activity. 
 
 ## Configuration Details
 
@@ -17,7 +17,7 @@ Before deploying HoneyTrail, you must configure the tool according to your speci
     "destination_email": "example@example.com",
     "source_email": "",
     "vpnapi_key": "",
-    "ses_identity": ""
+    "ses_identity": [""]
 }
 ``
 ### Configuration Options
