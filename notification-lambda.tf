@@ -100,4 +100,5 @@ resource "aws_s3_bucket_notification" "lambda_bucket_notification" {
     lambda_function_arn = module.lambda_function.lambda_function_arn
     events              = ["s3:ObjectCreated:*"]
   }
+  depends_on = [aws_lambda_permission.allows_s3_to_call_cloudtrail_insight_lambda]
 }
