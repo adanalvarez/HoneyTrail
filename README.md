@@ -33,6 +33,11 @@ Before deploying HoneyTrail, you must configure the tool according to your speci
 
 ## Deployment Instructions
 
+> HoneyTrail requires Terraform, here's a onliner to install it in CloudShell:
+> ```
+> git clone https://github.com/tfutils/tfenv.git ~/.tfenv && mkdir -p ~/bin && ln -s ~/.tfenv/bin/* ~/bin/ && export PATH="$HOME/bin:$PATH" && tfenv install 1.9.8 && tfenv use 1.9.8
+> ```
+
 - **Clone the Repository:** Start by cloning this repository to your local machine or cloud environment.
 - **Review and Modify Configuration:** Create a shared.auto.tfvars.json file using the example, and adjust the settings according to your preferences. Ensure the destination_email is correctly set to receive alerts.
 - **Customize Deception Services:** To increase the effectiveness of the deception, you are encouraged to modify the names and data of the services in the honeytoken-dynamodb.tf, honeytoken-lambda.tf, and honeytoken-s3.tf files. Personalizing these details makes the deception more convincing.
